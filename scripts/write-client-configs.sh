@@ -4,7 +4,7 @@ set -euo pipefail
 OUTPUT_DIR="${1:-public}"
 APT_URL="${APT_URL:-https://packages.orbitbits.com/deb}"
 RPM_URL="${RPM_URL:-https://packages.orbitbits.com/rpm}"
-KEY_URL="${KEY_URL:-https://packages.orbitbits.com/keys/orbitbits-packaging-pub.gpg}"
+KEY_URL="${KEY_URL:-https://packages.orbitbits.com/keys/orbitbits.gpg}"
 
 mkdir -p "$OUTPUT_DIR/deb" "$OUTPUT_DIR/rpm"
 

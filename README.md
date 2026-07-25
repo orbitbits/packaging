@@ -18,7 +18,7 @@ main
 gh-pages
   index.html
   keys/
-    orbitbits-packaging-pub.gpg
+    orbitbits.gpg
   deb/
     index.html
     dists/
@@ -57,7 +57,7 @@ Repository metadata URLs:
 APT:
 
 ```sh
-curl -fsSL https://packages.orbitbits.com/keys/orbitbits-packaging-pub.gpg \
+curl -fsSL https://packages.orbitbits.com/keys/orbitbits.gpg \
   | sudo gpg --dearmor -o /usr/share/keyrings/orbitbits.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/orbitbits.gpg] https://packages.orbitbits.com/deb stable main" \
@@ -69,7 +69,7 @@ sudo apt update
 RPM:
 
 ```sh
-sudo rpm --import https://packages.orbitbits.com/keys/orbitbits-packaging-pub.gpg
+sudo rpm --import https://packages.orbitbits.com/keys/orbitbits.gpg
 sudo dnf config-manager addrepo --from-repofile=https://packages.orbitbits.com/rpm/orbitbits.repo
 sudo dnf install <package>
 ```
