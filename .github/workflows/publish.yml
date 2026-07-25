@@ -56,7 +56,13 @@ jobs:
             public/orbitbits.list \
             public/tildr.list \
             public/orbitbits.repo \
-            public/tildr.repo
+            public/tildr.repo \
+            public/deb/orbitbits-packaging-pub.gpg \
+            public/deb/tildr-deb-pub.gpg \
+            public/deb/tildr.list \
+            public/rpm/orbitbits-packaging-pub.gpg \
+            public/rpm/tildr-rpm-pub.gpg \
+            public/rpm/tildr.repo
 
       - name: Install dependencies
         run: |
@@ -136,12 +142,10 @@ jobs:
 
       - name: Export public keys
         run: |
+          mkdir -p public/keys
           gpg --batch --yes --export -a "${{ steps.gpg.outputs.fingerprint }}" > /tmp/orbitbits-packaging-pub.gpg
           test -s /tmp/orbitbits-packaging-pub.gpg
-          cp /tmp/orbitbits-packaging-pub.gpg public/deb/orbitbits-packaging-pub.gpg
-          cp /tmp/orbitbits-packaging-pub.gpg public/deb/tildr-deb-pub.gpg
-          cp /tmp/orbitbits-packaging-pub.gpg public/rpm/orbitbits-packaging-pub.gpg
-          cp /tmp/orbitbits-packaging-pub.gpg public/rpm/tildr-rpm-pub.gpg
+          cp /tmp/orbitbits-packaging-pub.gpg public/keys/orbitbits-packaging-pub.gpg
 
       - name: Keep configured custom domain
         run: |
