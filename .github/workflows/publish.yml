@@ -1,0 +1,152 @@
+name: Publish Package Repositories
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/publish.yml'
+      - 'CNAME'
+  workflow_dispatch:
+    inputs:
+      package_type:
+        description: 'Package type to import: deb or rpm'
+        required: false
+      source_repository:
+        description: 'Repository that owns the release assets, e.g. orbitbits/tildr-deb'
+        required: false
+      tag:
+        description: 'Release tag to download, e.g. v0.3.3'
+        required: false
+  repository_dispatch:
+    types: [publish-package]
+
+concurrency:
+  group: package-repositories
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout current GitHub Pages
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages-current
+
+      - name: Prepare public tree
+        run: |
+          mkdir -p public
+          if [ -d gh-pages-current ]; then
+            tar --exclude='./.git' -C gh-pages-current -cf - . | tar -C public -xf -
+          fi
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev apt-utils createrepo-c rpm gnupg
+
+      - name: Import GPG key
+        id: gpg
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          fpr="$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/{print $10; exit}')"
+          if [ -z "$fpr" ]; then
+            echo "::error::No GPG secret key found after import"
+            exit 1
+          fi
+          echo "fingerprint=$fpr" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve package input
+        id: package
+        run: |
+          package_type="${{ github.event.client_payload.package_type || inputs.package_type }}"
+          source_repository="${{ github.event.client_payload.source_repository || inputs.source_repository }}"
+          tag="${{ github.event.client_payload.tag || inputs.tag }}"
+
+          echo "package_type=${package_type}" >> "$GITHUB_OUTPUT"
+          echo "source_repository=${source_repository}" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Download DEB artifacts
+        if: steps.package.outputs.package_type == 'deb'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          test -n "${{ steps.package.outputs.source_repository }}"
+          test -n "${{ steps.package.outputs.tag }}"
+          mkdir -p tmp-debs
+          gh release download "${{ steps.package.outputs.tag }}" \
+            --repo "${{ steps.package.outputs.source_repository }}" \
+            -p "*.deb" \
+            -D tmp-debs/ \
+            --skip-existing
+          find tmp-debs -name "*.deb" -exec ls -lh {} \;
+
+      - name: Import DEB artifacts
+        if: steps.package.outputs.package_type == 'deb'
+        run: bash scripts/import-debs.sh public tmp-debs
+
+      - name: Download RPM artifacts
+        if: steps.package.outputs.package_type == 'rpm'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          test -n "${{ steps.package.outputs.source_repository }}"
+          test -n "${{ steps.package.outputs.tag }}"
+          mkdir -p tmp-rpms
+          gh release download "${{ steps.package.outputs.tag }}" \
+            --repo "${{ steps.package.outputs.source_repository }}" \
+            -p "*.rpm" \
+            -D tmp-rpms/ \
+            --skip-existing
+          find tmp-rpms -name "*.rpm" -exec ls -lh {} \;
+
+      - name: Import RPM artifacts
+        if: steps.package.outputs.package_type == 'rpm'
+        run: bash scripts/import-rpms.sh public tmp-rpms
+
+      - name: Build repositories
+        env:
+          SIGN_REPO: "true"
+          SIGN_RPMS: "true"
+          GPG_FINGERPRINT: ${{ steps.gpg.outputs.fingerprint }}
+        run: |
+          echo "${{ secrets.GPG_PASSPHRASE }}" > /tmp/.gpg-passphrase
+          export GPG_PASSPHRASE_FILE=/tmp/.gpg-passphrase
+          bash scripts/build-all.sh public
+          rm -f /tmp/.gpg-passphrase
+
+      - name: Export public keys
+        run: |
+          gpg --batch --yes --export -a "${{ steps.gpg.outputs.fingerprint }}" > public/orbitbits-packaging-pub.gpg
+          test -s public/orbitbits-packaging-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/tildr-deb-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/tildr-rpm-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/deb/orbitbits-packaging-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/deb/tildr-deb-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/rpm/orbitbits-packaging-pub.gpg
+          cp public/orbitbits-packaging-pub.gpg public/rpm/tildr-rpm-pub.gpg
+
+      - name: Keep configured custom domain
+        run: |
+          cp CNAME public/CNAME
+
+      - name: Regenerate directory indexes
+        run: bash scripts/generate-index.sh public
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
+          keep_files: false
+          destination_dir: .

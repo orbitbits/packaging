@@ -1,0 +1,6 @@
+public/
+gh-pages-current/
+tmp-debs/
+tmp-rpms/
+*.tmp
+.DS_Store
