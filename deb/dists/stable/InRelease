@@ -4,40 +4,40 @@ Hash: SHA512
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Sat, 25 Jul 2026 22:27:10 +0000
+Date: Sat, 25 Jul 2026 22:37:14 +0000
 Description: APT repository for OrbitBits packages
 Label: OrbitBits Package Repository
 Origin: OrbitBits
 Suite: stable
 MD5Sum:
- 01edf84599b264639d7aac1aff194d49              212 Release
+ 1d18b0b2da6861ea71f8cb2348d24455              212 Release
  78aa8d6b628ee6895e7860caf3dc3697              865 main/binary-amd64/Packages
- 0853adb3978ea71b9d38ce06022335e0              582 main/binary-amd64/Packages.gz
+ 78589d26f006d3293f6dea505468824b              582 main/binary-amd64/Packages.gz
 SHA1:
- dc9f44a0945504d87a87467b860978905b2c1cbb              212 Release
+ 72905925554e3b4b744d7cf06b58cbb216329982              212 Release
  64dc81aebf65a7eea3263e6e847cee6fbd300a47              865 main/binary-amd64/Packages
- 0350365054ce5ce07bf816fe506125057ffe8c64              582 main/binary-amd64/Packages.gz
+ e95569d92832655f37a10748e61f9706cafed72f              582 main/binary-amd64/Packages.gz
 SHA256:
- 77cb315111fcf60bad1375d049502d6d1f9743707758ab90e04247f9e947e543              212 Release
+ 4f883fef3574ac004a43596a1bf61410864b0e5813dc4e5098849a3393d296f3              212 Release
  7953d785d9e4aa7b59cb07bd9c24e355f03b3dedb55780b560f3a8c2d957bd60              865 main/binary-amd64/Packages
- 80411ed29ac5f15915cfaca5e5dfd7b8a49747c22b1356c63eb8930e5fdbb2e2              582 main/binary-amd64/Packages.gz
+ 86d38482626acd303f2c6adb8c5f89ebbc45f8a6630ce9e1063708781e01241d              582 main/binary-amd64/Packages.gz
 SHA512:
- 151f733250ba93705600262280eb64fba594eb20e67a1b9dc884aaffc37b4b9b6440db54b5805f96f955243ba3e401c568bb77183542f293c6e7c36ad0b21fc2              212 Release
+ 414fed6e7853349b4e474bfcbba892e8aba67ca47ea4b17791ca9dd5674e8109860077c182bd2042db8109e0c053bd31098fec1968600c2c4c6c0db9e5e4a36c              212 Release
  9db085d2038b8da718e2ba1a09bcdd463c793efc851f84a3b5093ea0f7bb708991d2d3e8fc558bd6fdb0568145e5ce14feffc18030b980cec326b85124e0fa6c              865 main/binary-amd64/Packages
- f30f58b09aa7cc6275422375579f8d1f3f181a709c3131519f69da069bd23a323bf7207789d62ff9cb6f43a11f5376d4de39ce44b0fc294ce74fd39224e1c53a              582 main/binary-amd64/Packages.gz
+ bf982d8f21eb21d4af2cd7e8e6d43fe3d138df17ed0cb8129ac38e38d13323ce44e6eca7c3c809eb14ca1b06d37ea7e378384c16984292a16e768748a8003273              582 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE3igUnoKkblGCxC5xb8SQYTAgM2gFAmplOD4ACgkQb8SQYTAg
-M2jQXw/+M1apTMcaFpZ0v1b6lx8cuoUziHcukjeJhhgqk7GkNPLqK3yNP5YcaAoO
-nTTfAv2vGHyYG84NvTpFULZXdp8tIYHB+ROizlGZrBrxRAdK8fAtZMM2NqkysEhr
-NY0qIRBlWCF2Ywe30yR+wlYJYLndPKxMVeN7Y3ZrHpeQKqb49FL+8+so8eHwdBQX
-xPsKqZzVfHnTOmEZ3Esu5uGh0ghwtgsDEYUDBylxCE+o7OmbFohEafPK40xxeuhM
-oo0W3CfOLXGilo5FArxQY+XZ4tRIKH6X3HUyjpM4TtMcr2poOzEYQM9g5TJU9sfp
-jPCLC6L1TOju/56MjRATFZ8J89C+fMfiHPq8H/9tcBNckmkXZiH9nsHrFNz3DOVO
-CJUxIhpRbox9d70liZRWEoMYykxqL+4e8eqRtB0zWoWC9FhkEyJhEGm0h0+Xj1v0
-mOZXJpBlhNo+aokY3ZJBh7J82uKoqtSp5rng8KWOlhF2Wg2r1pD4foNKTH7lh3KX
-KuZDxtc2K7lI+DKQ6zeGN0584BjLUDT1NFXoW0KgAiWKIzIJDvHVH8FQeodq+3jR
-Kc2oVZNSoGpA47qd82xbCrFv5D2vFetPtGWw6J51Jjq7CXkiM30tbZjbzM8Nkgd5
-h3acEwCUnQN2JLiWIBJefD+QjanI5CC8g+Rl49laxt9zhbNknyA=
-=8z6/
+iQIzBAEBCgAdFiEE3igUnoKkblGCxC5xb8SQYTAgM2gFAmplOpoACgkQb8SQYTAg
+M2iC6RAAg6taL62WZSBxu+xbC7WyUgtYFqd3oNh9l8bTOfaRydgsP1PrpnnDmKZH
+8i//pm9N7IU6ITgTflYnzEbs1yWpbNVi5x1tPYRPro9J1rAW3u+OJK1Fkmrdb0zX
+PsxLaczRyckBax/UASrF7S4G8LKNkwYIoe37Gp1vu6PZTkjQBhOi1VUqWBtjsZBB
+SwkmEa7Zbn1DF0/mpKxiCUgCL0N48Imu/0J0m2qidSNqpKxSqVWPPsht4p/EPY5w
+ff5DIwLlCgu2u6KnDeR+QU061xqMkm1BK64L/sQ4HcZvJ8F6jy9xLk7xBNGNL98E
+TmwY9xPS9Q62emRW0tngvsAcIBchZqvfQ7iaQhJUv1n4fDjeIY1XYs/Fv2Mt6rTs
+o4wiHy6hINuAkQPwkkzhVIVZcH2oxyL/VQrQGGyf9D8BgGj0iH700NIVF5DvW7sC
+PXYQapYxLS1b6DHwNGC6PWXWpPrJPWTTbxXl19YEYS8O+nS5RasbvTobkqHlG7EB
+Ko2m1h16EVaK3lOTsYqEV3Ag2P3eFeT6jBaI47WAjw69WlcBbJCUegW75L09h4Tu
+zwV11/SX4ecaNsNrGMOA6zn96OCt1NBvmk7Kgt4rWpbHOBN/GIQYLYhWwWZOG4w+
+I3gJPbmFXwTWp+LdNnSzRbSn5XQ3cJL6V7MSHXD2L243mipo9XQ=
+=VhiS
 -----END PGP SIGNATURE-----
