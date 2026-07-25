@@ -48,6 +48,15 @@ jobs:
           if [ -d gh-pages-current ]; then
             tar --exclude='./.git' -C gh-pages-current -cf - . | tar -C public -xf -
           fi
+          find public -name '.nojekyll' -type f -delete
+          rm -f \
+            public/orbitbits-packaging-pub.gpg \
+            public/tildr-deb-pub.gpg \
+            public/tildr-rpm-pub.gpg \
+            public/orbitbits.list \
+            public/tildr.list \
+            public/orbitbits.repo \
+            public/tildr.repo
 
       - name: Install dependencies
         run: |
@@ -127,14 +136,12 @@ jobs:
 
       - name: Export public keys
         run: |
-          gpg --batch --yes --export -a "${{ steps.gpg.outputs.fingerprint }}" > public/orbitbits-packaging-pub.gpg
-          test -s public/orbitbits-packaging-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/tildr-deb-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/tildr-rpm-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/deb/orbitbits-packaging-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/deb/tildr-deb-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/rpm/orbitbits-packaging-pub.gpg
-          cp public/orbitbits-packaging-pub.gpg public/rpm/tildr-rpm-pub.gpg
+          gpg --batch --yes --export -a "${{ steps.gpg.outputs.fingerprint }}" > /tmp/orbitbits-packaging-pub.gpg
+          test -s /tmp/orbitbits-packaging-pub.gpg
+          cp /tmp/orbitbits-packaging-pub.gpg public/deb/orbitbits-packaging-pub.gpg
+          cp /tmp/orbitbits-packaging-pub.gpg public/deb/tildr-deb-pub.gpg
+          cp /tmp/orbitbits-packaging-pub.gpg public/rpm/orbitbits-packaging-pub.gpg
+          cp /tmp/orbitbits-packaging-pub.gpg public/rpm/tildr-rpm-pub.gpg
 
       - name: Keep configured custom domain
         run: |
@@ -150,3 +157,4 @@ jobs:
           publish_dir: public
           keep_files: false
           destination_dir: .
+          enable_jekyll: true

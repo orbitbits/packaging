@@ -7,15 +7,13 @@ RPM_URL="${RPM_URL:-https://packages.orbitbits.com/rpm}"
 
 mkdir -p "$OUTPUT_DIR/deb" "$OUTPUT_DIR/rpm"
 
-cat > "$OUTPUT_DIR/orbitbits.list" <<EOF
+cat > "$OUTPUT_DIR/deb/orbitbits.list" <<EOF
 deb [signed-by=/usr/share/keyrings/orbitbits.gpg] $APT_URL stable main
 EOF
 
-cp "$OUTPUT_DIR/orbitbits.list" "$OUTPUT_DIR/tildr.list"
-cp "$OUTPUT_DIR/orbitbits.list" "$OUTPUT_DIR/deb/orbitbits.list"
-cp "$OUTPUT_DIR/orbitbits.list" "$OUTPUT_DIR/deb/tildr.list"
+cp "$OUTPUT_DIR/deb/orbitbits.list" "$OUTPUT_DIR/deb/tildr.list"
 
-cat > "$OUTPUT_DIR/orbitbits.repo" <<EOF
+cat > "$OUTPUT_DIR/rpm/orbitbits.repo" <<EOF
 [orbitbits]
 name=OrbitBits Package Repository
 baseurl=$RPM_URL/fedora/\$releasever/\$basearch
@@ -25,6 +23,4 @@ repo_gpgcheck=1
 gpgkey=$RPM_URL/orbitbits-packaging-pub.gpg
 EOF
 
-cp "$OUTPUT_DIR/orbitbits.repo" "$OUTPUT_DIR/tildr.repo"
-cp "$OUTPUT_DIR/orbitbits.repo" "$OUTPUT_DIR/rpm/orbitbits.repo"
-cp "$OUTPUT_DIR/orbitbits.repo" "$OUTPUT_DIR/rpm/tildr.repo"
+cp "$OUTPUT_DIR/rpm/orbitbits.repo" "$OUTPUT_DIR/rpm/tildr.repo"

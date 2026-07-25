@@ -68,7 +68,7 @@ RPM:
 
 ```sh
 sudo rpm --import https://packages.orbitbits.com/rpm/orbitbits-packaging-pub.gpg
-sudo dnf config-manager addrepo --from-repofile=https://packages.orbitbits.com/orbitbits.repo
+sudo dnf config-manager addrepo --from-repofile=https://packages.orbitbits.com/rpm/orbitbits.repo
 sudo dnf install <package>
 ```
 

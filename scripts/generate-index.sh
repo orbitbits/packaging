@@ -66,6 +66,10 @@ EOF
     local name size date
     name=$(basename "$file")
     [ "$name" = "index.html" ] && continue
+    [ "$name" = "CNAME" ] && continue
+    case "$name" in
+      .*) continue ;;
+    esac
     size=$(stat -c '%s' "$file" 2>/dev/null)
     date=$(stat -c '%y' "$file" 2>/dev/null | cut -d' ' -f1)
     printf '<tr><td><a href="%s">%s</a></td><td>%s</td><td>%s</td></tr>\n' "$name" "$name" "$(human_size "$size")" "$date" >> "$dir/index.html"
