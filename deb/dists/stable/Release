@@ -1,0 +1,24 @@
+Architectures: amd64
+Codename: stable
+Components: main
+Date: Sat, 25 Jul 2026 22:21:56 +0000
+Description: APT repository for OrbitBits packages
+Label: OrbitBits Package Repository
+Origin: OrbitBits
+Suite: stable
+MD5Sum:
+ 2f483784af2a7b2b462a007ef56ae415              212 Release
+ d41d8cd98f00b204e9800998ecf8427e                0 main/binary-amd64/Packages
+ cf0e51e8a2ca3132ee8e19df9fb57b4c               29 main/binary-amd64/Packages.gz
+SHA1:
+ 85505191a0ceff8caee7a66ee602b9392ff10b3b              212 Release
+ da39a3ee5e6b4b0d3255bfef95601890afd80709                0 main/binary-amd64/Packages
+ 24adb73b416fd105888c2f2f81ef37ae657e21cf               29 main/binary-amd64/Packages.gz
+SHA256:
+ f898a83959eb6273812a27043750a39c6df545ce47320a9d302dd2f5bb211b06              212 Release
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                0 main/binary-amd64/Packages
+ c62f104b6aafda230212c792ce0620b0ca9bbc844ad06a9e104c47a84af70b70               29 main/binary-amd64/Packages.gz
+SHA512:
+ c80606be508c557397b0b7cd700a88e4b4ae4e7efbbd045fa435197e0c6f5ddce0867206944d20ec7b932ee274fc1813ba9014a07f15cfce9162ae6cd02cbdef              212 Release
+ cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e                0 main/binary-amd64/Packages
+ 7a63722001901bf6a2c5bf87772b26b626cec3e2dde1223557a72aca2245bd1b8db17d472137de956b1ad211e293ad3194e44b2dd7713474f4b67970b6806b8a               29 main/binary-amd64/Packages.gz
