@@ -1,0 +1,315 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8fafc;
+  color: #172033;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+a {
+  color: #177782;
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.main {
+  min-height: 55vh;
+}
+
+.navbar-default {
+  min-height: 60px;
+  z-index: 2050 !important;
+  border-bottom: 1px solid rgba(186, 186, 186, 0.15) !important;
+  background: linear-gradient(to bottom, rgba(236, 236, 236, 0.95), rgba(246, 246, 246, 0.72)) !important;
+  backdrop-filter: blur(8px) !important;
+}
+.navbar-default a {
+  text-decoration: none !important;
+}
+.navbar-default__brand-image {
+  width: 42px;
+  padding: 0 !important;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+}
+.navbar-default__brand-image:hover {
+  transform: scale(1.06) rotate(-6deg);
+}
+.navbar-default__brand-text {
+  margin-top: 10px;
+  margin-left: -5px;
+  font-family: "Baloo 2", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.navbar-default__brand-text-link {
+  color: #1d1d1f !important;
+}
+.navbar-default__nav-right {
+  padding-top: 3px !important;
+}
+.navbar-default__nav-right .nav-item {
+  list-style: none;
+}
+.navbar-default__nav-right .nav-link {
+  position: relative;
+  margin: 0 10px;
+  padding-bottom: 3px;
+  color: #252525 !important;
+  transition: color 0.25s ease;
+}
+.navbar-default__nav-right .nav-link:hover {
+  color: #000000 !important;
+}
+.navbar-default__nav-right .nav-link::after {
+  display: block;
+  width: 0;
+  height: 2px;
+  margin-top: 3px;
+  background-color: #000000 !important;
+  content: "";
+  transition: width 0.25s ease;
+}
+.navbar-default__nav-right .nav-link:hover::after {
+  width: 100%;
+}
+.navbar-default__mobile__menu-btn {
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+}
+.navbar-default__mobile__menu-btn i {
+  color: #1d1d1f;
+}
+
+.brand__text,
+.brand__text__bits {
+  transition: color 0.3s ease;
+}
+
+.brand__text:hover .brand__text__bits {
+  color: #26c7d9 !important;
+}
+
+.menu-mobile {
+  --bs-offcanvas-bg: rgba(10, 15, 20, .92);
+  --bs-offcanvas-width: min(85vw, 340px);
+  color: #f7f7f7;
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.menu-mobile__header {
+  padding: 0.68rem 1.25rem;
+}
+.menu-mobile__btn-close {
+  border: 0;
+  background: transparent;
+  color: #26c7d9;
+  font-size: 1.1rem;
+}
+.menu-mobile__list {
+  margin: 0;
+  padding: 0;
+}
+.menu-mobile__list .nav-item {
+  border-bottom: 1px solid color-mix(in srgb, #f7f7f7, transparent 90%);
+}
+.menu-mobile__list .nav-link {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  color: #f7f7f7 !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.menu-mobile__list .nav-link:hover, .menu-mobile__list .nav-link:focus {
+  background: color-mix(in srgb, #f7f7f7, transparent 92%);
+  color: #26c7d9 !important;
+}
+.menu-mobile .menu-icons {
+  color: #26c7d9;
+  font-size: 1.1rem;
+}
+
+h1 {
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #d7dde5;
+  font-size: 1.2rem;
+}
+
+p {
+  max-width: 64ch;
+}
+
+code,
+pre,
+table {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+code {
+  padding: 0.12rem 0.3rem;
+  border-radius: 4px;
+  background: #edf2f7;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+
+.btn-primary {
+  --bs-btn-color: #00110e;
+  --bs-btn-bg: #26c7d9;
+  --bs-btn-border-color: #26c7d9;
+  --bs-btn-hover-color: #00110e;
+  --bs-btn-hover-bg: #5fe4d3;
+  --bs-btn-hover-border-color: #26c7d9;
+  --bs-btn-active-color: #00110e;
+  --bs-btn-active-bg: #5fe4d3;
+  --bs-btn-active-border-color: #26c7d9;
+  background: linear-gradient(135deg, #26c7d9, #5fe4d3);
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(38, 199, 217, 0.28);
+  text-decoration: none !important;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #177782;
+  --bs-btn-border-color: #26c7d9;
+  --bs-btn-hover-color: #00110e;
+  --bs-btn-hover-bg: #26c7d9;
+  --bs-btn-hover-border-color: #26c7d9;
+  --bs-btn-active-color: #00110e;
+  --bs-btn-active-bg: #26c7d9;
+  --bs-btn-active-border-color: #26c7d9;
+}
+
+.repository-panel {
+  padding: 1.25rem;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.directory-table-wrap {
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.directory-table {
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+.directory-table th,
+.directory-table td {
+  padding: 0.65rem 0.8rem;
+}
+.directory-table th {
+  color: #5c667a;
+  font-weight: 600;
+}
+.directory-table th button {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+.directory-table th button:hover {
+  color: #172033;
+  text-decoration: underline;
+}
+.directory-table th button[aria-sort=ascending]::after {
+  content: " up";
+}
+.directory-table th button[aria-sort=descending]::after {
+  content: " down";
+}
+
+.footer {
+  z-index: 1;
+  background-color: #04080d;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+.footer a {
+  color: #26c7d9;
+  text-decoration: underline;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.footer a:hover {
+  color: #ffffff;
+}
+.footer .nav-link {
+  display: inline-block !important;
+  width: fit-content;
+  padding: 0;
+}
+.footer .description {
+  color: color-mix(in srgb, #ffffff, transparent 25%);
+}
+.footer__col-heading {
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.footer__brand-image {
+  transition: transform 0.3s ease;
+}
+.footer__brand-image:hover {
+  transform: scale(1.06) rotate(-6deg);
+}
+.footer-brand__text {
+  margin-top: 15px;
+  margin-left: -7px;
+  color: #ffffff;
+  font-family: "Baloo 2", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.footer-socials {
+  display: inline-flex;
+  color: #26c7d9 !important;
+  font-size: 1.4rem;
+  text-decoration: none !important;
+}
+.footer-socials:hover {
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+.footer .border-top {
+  border-top: 1px solid rgba(230, 230, 230, 0.177) !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-default {
+    background: linear-gradient(to bottom, rgba(236, 236, 236, 0.95), rgba(246, 246, 246, 0.82)) !important;
+    backdrop-filter: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
