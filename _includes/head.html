@@ -2,17 +2,37 @@
 {% assign page_title = page.title | default: site_title %}
 {% assign description = page.description | default: site.data.generic.packages.description %}
 {% assign canonical_url = page.url | absolute_url %}
+{% assign assets = site.data.generic.assets %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <title>{% if page_title == site_title %}{{ site_title }}{% else %}{{ page_title }} - {{ site_title }}{% endif %}</title>
 <meta name="description" content="{{ description | strip_html | normalize_whitespace | escape }}">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="{{ canonical_url }}">
 <meta property="og:site_name" content="{{ site_title | escape }}">
 <meta property="og:title" content="{{ page_title | escape }}">
 <meta property="og:description" content="{{ description | strip_html | normalize_whitespace | escape }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ site.data.generic.brand.logo_dark }}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ page_title | escape }}">
 <meta name="twitter:description" content="{{ description | strip_html | normalize_whitespace | escape }}">
-<link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+<meta name="twitter:image" content="{{ site.data.generic.brand.logo_dark }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site_title | jsonify }},
+  "headline": {{ page_title | jsonify }},
+  "description": {{ description | strip_html | normalize_whitespace | jsonify }},
+  "url": {{ canonical_url | jsonify }}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="{{ assets.fonts }}">
+<link rel="stylesheet" href="{{ assets.bootstrap_css | relative_url }}">
+<link rel="stylesheet" href="{{ assets.bootstrap_icons }}">
+<link rel="stylesheet" href="{{ assets.stylesheet | relative_url }}">

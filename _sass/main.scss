@@ -4,16 +4,19 @@ $border: #d7dde5;
 $text: #172033;
 $muted: #5c667a;
 $accent: #0f766e;
+$accent-bright: #26c7d9;
 $code: #edf2f7;
+$nav-bg: rgba(10, 15, 20, .82);
+$footer-bg: #04080d;
 $font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 $font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+$font-brand: "Baloo 2", $font-body;
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
   background: $background;
   color: $text;
   font-family: $font-body;
@@ -26,49 +29,127 @@ a {
 }
 
 a:hover {
+  color: color-mix(in srgb, $accent, #000 20%);
   text-decoration: underline;
 }
 
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-bottom: 1px solid $border;
-  background: $surface;
+.main {
+  min-height: 55vh;
 }
 
-.brand {
-  color: $text;
-  font-weight: 700;
+.navbar-default {
+  min-height: 60px;
+  z-index: 2050 !important;
+  border-bottom: 1px solid color-mix(in srgb, $accent-bright, transparent 85%);
+  background: color-mix(in srgb, $nav-bg, transparent 10%) !important;
+  backdrop-filter: blur(12px);
+
+  a {
+    text-decoration: none !important;
+  }
+
+  &__brand-image {
+    width: 42px;
+    padding: 0 !important;
+    flex-shrink: 0;
+    transition: transform .3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.06) rotate(-6deg);
+    }
+  }
+
+  &__brand-text {
+    margin-top: 10px;
+    margin-left: -5px;
+    font-family: $font-brand;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__brand-text-link {
+    color: #f7f7f7 !important;
+  }
+
+  &__nav-right {
+    padding-top: 3px !important;
+
+    .nav-item {
+      list-style: none;
+    }
+
+    .nav-link {
+      position: relative;
+      margin: 0 10px;
+      padding-bottom: 3px;
+      color: #f7f7f7 !important;
+      transition: color .25s ease;
+
+      &:hover {
+        color: $accent-bright !important;
+      }
+    }
+  }
+
+  &__mobile__menu-btn {
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+
+    i {
+      color: #f7f7f7;
+    }
+  }
 }
 
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .85rem;
-  font-size: .95rem;
-}
+.menu-mobile {
+  --bs-offcanvas-bg: rgba(10, 15, 20, .92);
+  --bs-offcanvas-width: min(85vw, 340px);
+  color: #f7f7f7;
+  backdrop-filter: saturate(180%) blur(20px);
 
-.page {
-  width: min(920px, calc(100% - 2rem));
-  margin: 3rem auto;
-}
+  &__header {
+    padding: .68rem 1.25rem;
+  }
 
-.site-footer {
-  width: min(920px, calc(100% - 2rem));
-  margin: 3rem auto 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid $border;
-  color: $muted;
-  font-size: .9rem;
+  &__btn-close {
+    border: 0;
+    background: transparent;
+    color: $accent-bright;
+    font-size: 1.1rem;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+
+    .nav-item {
+      border-bottom: 1px solid color-mix(in srgb, #f7f7f7, transparent 90%);
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      color: #f7f7f7 !important;
+      font-size: 1.05rem;
+      font-weight: 500;
+
+      &:hover,
+      &:focus {
+        background: color-mix(in srgb, #f7f7f7, transparent 92%);
+        color: $accent-bright !important;
+      }
+    }
+  }
+
+  .menu-icons {
+    color: $accent-bright;
+    font-size: 1.1rem;
+  }
 }
 
 h1 {
-  margin: 0 0 1rem;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.05;
+  letter-spacing: 0;
 }
 
 h2 {
@@ -79,12 +160,7 @@ h2 {
 }
 
 p {
-  color: $muted;
   max-width: 64ch;
-}
-
-ul {
-  padding-left: 1.25rem;
 }
 
 code,
@@ -99,44 +175,116 @@ code {
   background: $code;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.repository-panel {
+  padding: 1.25rem;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $surface;
+}
+
+.directory-table-wrap {
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $surface;
+}
+
+.directory-table {
+  margin-bottom: 0;
   overflow-wrap: anywhere;
-  font-size: .92rem;
+
+  th,
+  td {
+    padding: .65rem .8rem;
+  }
+
+  th {
+    color: $muted;
+    font-weight: 600;
+  }
+
+  th button {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  th button:hover {
+    color: $text;
+    text-decoration: underline;
+  }
+
+  th button[aria-sort="ascending"]::after {
+    content: " up";
+  }
+
+  th button[aria-sort="descending"]::after {
+    content: " down";
+  }
 }
 
-th,
-td {
-  padding: .55rem .75rem;
-  border-bottom: 1px solid $border;
-  text-align: left;
+.footer {
+  z-index: 1;
+  background-color: $footer-bg;
+  color: #ffffff;
+  font-size: .9rem;
+
+  a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .nav-link {
+    display: inline-block !important;
+    width: fit-content;
+    padding: 0;
+  }
+
+  .description {
+    color: color-mix(in srgb, #ffffff, transparent 25%);
+  }
+
+  &__col-heading {
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  &__brand-image {
+    transition: transform .3s ease;
+
+    &:hover {
+      transform: scale(1.06) rotate(-6deg);
+    }
+  }
+
+  &-brand__text {
+    margin-top: 15px;
+    margin-left: -7px;
+    color: #ffffff;
+    font-family: $font-brand;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  &-socials {
+    font-size: 1.4rem;
+  }
+
+  .border-top {
+    border-top: 1px solid rgba(230, 230, 230, .177) !important;
+  }
 }
 
-th {
-  color: $muted;
-  font-weight: 600;
-}
-
-th button {
-  appearance: none;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-}
-
-th button:hover {
-  color: $text;
-  text-decoration: underline;
-}
-
-th button[aria-sort="ascending"]::after {
-  content: " up";
-}
-
-th button[aria-sort="descending"]::after {
-  content: " down";
+@media (max-width: 991.98px) {
+  .navbar-default {
+    background: rgba(10, 15, 20, .92) !important;
+    backdrop-filter: none !important;
+  }
 }

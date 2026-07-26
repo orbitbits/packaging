@@ -1,0 +1,77 @@
+{% assign brand = site.data.generic.brand %}
+{% assign nav_items = site.data.generic.nav %}
+
+<nav class="navbar navbar-expand-lg navbar-default sticky-top">
+  <div class="container">
+    <div class="d-flex align-items-center me-auto">
+      <div class="navbar-default__brand-logo">
+        <a class="navbar-default__brand-link" href="{{ "/" | relative_url }}">
+          <img
+            id="brand"
+            class="navbar-default__brand-image"
+            src="{{ brand.logo_dark }}"
+            data-light="{{ brand.logo_light }}"
+            data-dark="{{ brand.logo_dark }}"
+            alt="{{ brand.name }}"
+            loading="lazy">
+        </a>
+      </div>
+      <div class="navbar-default__brand-text">
+        <a class="navbar-default__brand-text-link brand__text" href="{{ "/" | relative_url }}">
+          {{ brand.name | remove_first: "O" }}
+        </a>
+      </div>
+    </div>
+
+    <div class="d-none d-lg-flex navbar-default__nav-right">
+      {% for item in nav_items %}
+        <li class="nav-item">
+          <a
+            class="nav-link d-inline-block text-dark"
+            href="{{ item.href | relative_url }}"
+            aria-label="{{ item.aria_label }}"
+            title="{{ item.title }}"
+            {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+            <i class="menu-icons {{ item.icon }} me-2">&nbsp;</i>{{ item.label }}
+          </a>
+        </li>
+      {% endfor %}
+    </div>
+
+    <div class="d-lg-none navbar-default__mobile">
+      <button
+        class="btn navbar-default__mobile__menu-btn"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#nvMenuMobile"
+        aria-controls="nvMenuMobile"
+        aria-label="Open menu">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-end d-lg-none menu-mobile" tabindex="-1" id="nvMenuMobile">
+  <div class="offcanvas-header menu-mobile__header">
+    <button type="button" class="btn menu-mobile__btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <ul class="list-unstyled menu-mobile__list">
+      {% for item in nav_items %}
+        <li class="nav-item">
+          <a
+            class="nav-link d-flex align-items-center"
+            href="{{ item.href | relative_url }}"
+            aria-label="{{ item.aria_label }}"
+            title="{{ item.title }}"
+            {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+            <i class="menu-icons {{ item.icon }} me-2">&nbsp;</i>{{ item.label }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

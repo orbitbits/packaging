@@ -1,4 +1,82 @@
-<footer class="site-footer">
-  <span>&copy; {{ "now" | date: "%Y" }} <a href="{{ site.data.generic.brand.url }}">{{ site.data.generic.brand.name }}</a></span>
+{% assign brand = site.data.generic.brand %}
+{% assign packages = site.data.generic.packages %}
+{% assign contact = site.data.generic.contact %}
+{% assign author = site.data.generic.author %}
+{% assign current_year = site.time | date: "%Y" %}
+
+<footer class="py-5 mt-auto footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 mb-3">
+        <a href="{{ "/" | relative_url }}" class="d-inline-flex align-items-center mb-2 text-decoration-none brand">
+          <img
+            class="footer__brand-image"
+            src="{{ brand.logo_light }}"
+            alt="{{ brand.name }}"
+            width="50"
+            loading="lazy">
+          <span class="footer-brand__text brand__text">{{ brand.name | remove_first: "O" }}</span>
+        </a>
+
+        <p class="description">{{ packages.description }}</p>
+
+        <ul class="list-unstyled d-flex mb-2">
+          {% for item in site.data.generic.socials %}
+            <li class="me-3">
+              <a
+                class="footer-socials"
+                href="{{ item.url }}"
+                title="{{ item.title }}"
+                target="_blank"
+                rel="noopener noreferrer">
+                <i class="{{ item.icon }}"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <p class="mb-0">
+          E-mail:
+          <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        </p>
+      </div>
+
+      <div class="col-12 col-md-2 text-start ms-md-auto mb-3 footer__col">
+        <h5 class="footer__col-heading">Repositories</h5>
+        <ul class="nav flex-column">
+          {% for repository in packages.repositories %}
+            <li class="nav-item mb-2">
+              <a href="{{ repository.path | relative_url }}" class="nav-link p-0 d-inline-block links">
+                {{ repository.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-2 mb-3 text-md-end footer__col">
+        <h5 class="footer__col-heading">OrbitBits</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="{{ brand.url }}" class="nav-link p-0 d-inline-block links">Website</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="https://orbitbits.com/legal/privacy/" class="nav-link p-0 d-inline-block links">Privacy Policy</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="https://orbitbits.com/legal/terms/" class="nav-link d-inline-block p-0 links">Terms of Service</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center pt-4 mt-4 border-top">
+      <p class="text-center mb-0">
+        &copy; {{ current_year }} {{ brand.name }}. Created by
+        <a class="links" href="{{ author.url }}" target="_blank" rel="noopener noreferrer">{{ author.name }}</a>.
+      </p>
+    </div>
+  </div>
 </footer>
-<script src="{{ "/assets/js/scripts.js" | relative_url }}"></script>
+<script src="{{ site.data.generic.assets.bootstrap_js | relative_url }}" defer></script>
+<script src="{{ site.data.generic.assets.scripts | relative_url }}" defer></script>

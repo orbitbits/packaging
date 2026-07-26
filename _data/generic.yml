@@ -1,6 +1,66 @@
 brand:
   name: "OrbitBits"
   url: "https://orbitbits.com"
+  logo_dark: "https://raw.githubusercontent.com/orbitbits/orbitbits-logo/refs/heads/main/svg/site/orbitbits-transparent-dark.svg"
+  logo_light: "https://raw.githubusercontent.com/orbitbits/orbitbits-logo/refs/heads/main/svg/site/orbitbits-transparent-light.svg"
+
+author:
+  name: "William C. Canin"
+  url: "https://williamcanin.github.io"
+
+contact:
+  email: "contact@orbitbits.com"
+
+assets:
+  fonts: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Sora:wght@100..800&family=Baloo+2:wght@400..800&display=swap"
+  bootstrap_css: "/assets/vendors/bootstrap-5.3.8/css/bootstrap.min.css"
+  bootstrap_js: "/assets/vendors/bootstrap-5.3.8/js/bootstrap.bundle.min.js"
+  bootstrap_icons: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+  stylesheet: "/assets/css/style.css"
+  scripts: "/assets/js/scripts.js"
+
+socials:
+  - title: "GitHub"
+    icon: "bi bi-github"
+    url: "https://github.com/orbitbits"
+  - title: "GitLab"
+    icon: "bi bi-gitlab"
+    url: "https://gitlab.com/orbitbits"
+  - title: "YouTube"
+    icon: "bi bi-youtube"
+    url: "https://youtube.com/@orbitbitshq"
+  - title: "Facebook"
+    icon: "bi bi-facebook"
+    url: "https://facebook.com/orbitbits"
+  - title: "Bluesky"
+    icon: "bi bi-bluesky"
+    url: "https://bsky.app/profile/orbitbits.com"
+  - title: "LinkedIn"
+    icon: "bi bi-linkedin"
+    url: "https://www.linkedin.com/company/orbitbits/"
+
+nav:
+  - label: "DEB"
+    href: "/deb/"
+    aria_label: "APT repository"
+    title: "APT repository"
+    icon: "bi bi-box"
+  - label: "RPM"
+    href: "/rpm/"
+    aria_label: "RPM repository"
+    title: "RPM repository"
+    icon: "bi bi-box-seam-fill"
+  - label: "GPG Key"
+    href: "/keys/orbitbits.gpg"
+    aria_label: "OrbitBits GPG key"
+    title: "OrbitBits GPG key"
+    icon: "bi bi-key-fill"
+  - label: "GitHub"
+    href: "https://github.com/orbitbits/packaging"
+    aria_label: "Packaging repository on GitHub"
+    title: "Packaging repository on GitHub"
+    icon: "bi bi-github"
+    external: true
 
 packages:
   title: "OrbitBits Packages"

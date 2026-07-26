@@ -95,9 +95,11 @@ Build the local repository:
 make build
 ```
 
-Serve it locally:
+Build or serve only the Jekyll site:
 
 ```sh
+make jekyll-build
+make jekyll-serve
 make serve
 ```
 

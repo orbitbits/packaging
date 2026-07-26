@@ -3,42 +3,45 @@
   <head>
     {% include head.html %}
   </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="{{ "/" | relative_url }}">{{ site.data.generic.brand.name }}</a>
-      <nav aria-label="Package repositories">
-        <a href="{{ "/deb/" | relative_url }}">DEB</a>
-        <a href="{{ "/rpm/" | relative_url }}">RPM</a>
-        <a href="{{ "/keys/orbitbits.gpg" | relative_url }}">GPG key</a>
-      </nav>
-    </header>
-    <main class="page">
-      <h1>Index of {{ page.directory_path }}</h1>
-      <table class="directory-table" data-sortable-table>
-        <thead>
-          <tr>
-            <th><button type="button" data-sort-key="name">Name</button></th>
-            <th><button type="button" data-sort-key="size">Size</button></th>
-            <th><button type="button" data-sort-key="date">Date</button></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% if page.parent_path %}
-            <tr data-name="../" data-size="-1" data-date="0">
-              <td><a href="{{ page.parent_path }}">../</a></td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-          {% endif %}
-          {% for entry in page.entries %}
-            <tr data-name="{{ entry.name | downcase | escape }}" data-size="{{ entry.sort_size }}" data-date="{{ entry.sort_date }}">
-              <td><a href="{{ entry.href }}">{{ entry.label }}</a></td>
-              <td>{{ entry.size }}</td>
-              <td>{{ entry.date }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+  <body class="d-flex flex-column min-vh-100">
+    {% include navbar.html %}
+    <main class="flex-shrink-0 main">
+      <div class="container py-5">
+        <div class="row mb-4">
+          <div class="col-lg-9">
+            <p class="text-uppercase text-muted small fw-semibold mb-2">Package directory</p>
+            <h1 class="display-6 fw-bold mb-0">Index of {{ page.directory_path }}</h1>
+          </div>
+        </div>
+
+        <div class="table-responsive directory-table-wrap">
+          <table class="table table-hover align-middle directory-table" data-sortable-table>
+            <thead>
+              <tr>
+                <th><button type="button" data-sort-key="name">Name</button></th>
+                <th><button type="button" data-sort-key="size">Size</button></th>
+                <th><button type="button" data-sort-key="date">Date</button></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if page.parent_path %}
+                <tr data-name="../" data-size="-1" data-date="0">
+                  <td><a href="{{ page.parent_path }}">../</a></td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              {% endif %}
+              {% for entry in page.entries %}
+                <tr data-name="{{ entry.name | downcase | escape }}" data-size="{{ entry.sort_size }}" data-date="{{ entry.sort_date }}">
+                  <td><a href="{{ entry.href }}">{{ entry.label }}</a></td>
+                  <td>{{ entry.size }}</td>
+                  <td>{{ entry.date }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </main>
     {% include footer.html %}
   </body>

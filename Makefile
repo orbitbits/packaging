@@ -2,7 +2,7 @@ BRANCH := $(shell git branch --show-current 2>/dev/null || echo "unknown")
 REMOTES := $(shell git remote 2>/dev/null || echo "")
 .DEFAULT_GOAL := help
 
-.PHONY: help build apt rpm index clean serve push push-lease
+.PHONY: help build apt rpm index jekyll-build jekyll-serve clean serve push push-lease
 
 help:
 	@echo "Options:"
@@ -11,7 +11,9 @@ help:
 	@echo "  make apt        -> Build only the APT repository"
 	@echo "  make rpm        -> Build only the RPM repository"
 	@echo "  make index      -> Generate directory index.html files"
-	@echo "  make serve      -> Serve public/ locally on port 8080"
+	@echo "  make jekyll-build -> Build only the Jekyll site"
+	@echo "  make jekyll-serve -> Serve Jekyll locally"
+	@echo "  make serve      -> Alias for make jekyll-serve"
 	@echo "  make clean      -> Remove generated output"
 	@echo
 	@echo "  make push       -> Push the current branch to all remotes"
@@ -19,8 +21,7 @@ help:
 
 build:
 	@ruby tools/rb/build_all.rb
-	@ruby tools/rb/generate_directory_pages.rb public _pages
-	@bundle exec jekyll build
+	@$(MAKE) jekyll-build
 
 apt:
 	@ruby tools/rb/build_apt_repo.rb
@@ -29,11 +30,17 @@ rpm:
 	@ruby tools/rb/build_rpm_repo.rb
 
 index:
+	@$(MAKE) jekyll-build
+
+jekyll-build:
 	@ruby tools/rb/generate_directory_pages.rb public _pages
 	@bundle exec jekyll build
 
-serve:
-	@cd public && python3 -m http.server 8080
+jekyll-serve:
+	@ruby tools/rb/generate_directory_pages.rb public _pages
+	@bundle exec jekyll serve --livereload
+
+serve: jekyll-serve
 
 clean:
 	@rm -rf public

@@ -7,21 +7,37 @@ title: "OrbitBits Packages"
 
 # {{ packages.title }}
 
-{{ packages.description }}
+<p class="lead text-muted">{{ packages.description }}</p>
 
+<div class="row g-4 mt-2">
 {% for repository in packages.repositories %}
-## {{ repository.name }}
+  <div class="col-12 col-lg-6">
+    <section class="repository-panel h-100">
+      <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+        <h2 class="h4 mb-0">{{ repository.name }}</h2>
+        <a class="btn btn-outline-primary btn-sm" href="{{ repository.path | relative_url }}">
+          Browse
+        </a>
+      </div>
 
-[Browse repository]({{ repository.path | relative_url }})
-{% if repository.config %}
-[Client configuration]({{ repository.config | relative_url }})
-{% endif %}
+      {% if repository.config %}
+        <p class="mb-3">
+          <a href="{{ repository.config | relative_url }}">Client configuration</a>
+        </p>
+      {% endif %}
 
-{% for metadata in repository.metadata %}
-- [{{ metadata }}]({{ metadata | relative_url }})
+      <ul class="list-unstyled mb-0">
+        {% for metadata in repository.metadata %}
+          <li class="mb-2">
+            <a href="{{ metadata | relative_url }}"><code>{{ metadata }}</code></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 {% endfor %}
-{% endfor %}
+</div>
 
 ## Signing Key
 
-[Download OrbitBits public key]({{ packages.key_url }})
+<p><a class="btn btn-primary" href="{{ packages.key_url }}">Download OrbitBits public key</a></p>
