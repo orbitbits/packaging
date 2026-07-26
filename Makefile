@@ -18,18 +18,18 @@ help:
 	@echo "  make push-lease -> Force-push with lease to all remotes"
 
 build:
-	@bash scripts/build-all.sh
+	@ruby tools/rb/build_all.rb
 	@bundle exec jekyll build
-	@bash scripts/generate-index.sh public
+	@ruby tools/rb/generate_indexes.rb public
 
 apt:
-	@bash scripts/build-apt-repo.sh
+	@ruby tools/rb/build_apt_repo.rb
 
 rpm:
-	@bash scripts/build-rpm-repo.sh
+	@ruby tools/rb/build_rpm_repo.rb
 
 index:
-	@bash scripts/generate-index.sh public
+	@ruby tools/rb/generate_indexes.rb public
 
 serve:
 	@cd public && python3 -m http.server 8080

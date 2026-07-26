@@ -6,8 +6,8 @@ repository. They should not publish APT or RPM metadata directly.
 ## Recommended flow
 
 1. Build the package in the product repository.
-2. Attach the artifact to the product repository release.
-3. Trigger `orbitbits/packaging` with the release tag.
+2. Upload the package as a short-lived GitHub Actions artifact.
+3. Trigger `orbitbits/packaging` with the workflow `run_id` and artifact name.
 4. Let `orbitbits/packaging` import the artifact into `gh-pages`, regenerate
    metadata, sign it, and deploy GitHub Pages.
 
@@ -22,7 +22,8 @@ repository. They should not publish APT or RPM metadata directly.
       -f event_type=publish-package \
       -f client_payload[package_type]=deb \
       -f client_payload[source_repository]=orbitbits/tildr-deb \
-      -f client_payload[tag]="${{ github.event.release.tag_name }}"
+      -f client_payload[run_id]="${{ github.run_id }}" \
+      -f client_payload[artifact_pattern]="tildr-deb-*"
 ```
 
 ## RPM example
@@ -36,14 +37,15 @@ repository. They should not publish APT or RPM metadata directly.
       -f event_type=publish-package \
       -f client_payload[package_type]=rpm \
       -f client_payload[source_repository]=orbitbits/tildr-rpm \
-      -f client_payload[tag]="${{ github.event.release.tag_name }}"
+      -f client_payload[run_id]="${{ github.run_id }}" \
+      -f client_payload[artifact_pattern]="tildr-rpm"
 ```
 
 ## Required token
 
 Create `ORBITBITS_PACKAGING_TOKEN` with permission to trigger workflows in
-`orbitbits/packaging`. A fine-grained GitHub token scoped only to this
-repository is enough.
+`orbitbits/packaging`. The same token should be available to `orbitbits/packaging`
+with permission to read Actions artifacts from the package repositories.
 
 ## Domain note
 

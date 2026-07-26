@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scripts/**'
       - 'tools/rb/**'
       - '_config.yml'
       - '_data/**'
@@ -63,31 +62,7 @@ jobs:
           path: gh-pages-current
 
       - name: Prepare public tree
-        run: |
-          mkdir -p public
-          if [ -d gh-pages-current ]; then
-            tar --exclude='./.git' -C gh-pages-current -cf - . | tar -C public -xf -
-          fi
-          find public -name '.nojekyll' -type f -delete
-          rm -f \
-            public/orbitbits-packaging-pub.gpg \
-            public/orbitbits.gpg \
-            public/tildr-deb-pub.gpg \
-            public/tildr-rpm-pub.gpg \
-            public/orbitbits.list \
-            public/tildr.list \
-            public/orbitbits.repo \
-            public/tildr.repo \
-            public/keys/orbitbits-packaging-pub.gpg \
-            public/deb/orbitbits-packaging-pub.gpg \
-            public/deb/orbitbits.gpg \
-            public/deb/tildr-deb-pub.gpg \
-            public/deb/tildr.list \
-            public/rpm/orbitbits-packaging-pub.gpg \
-            public/rpm/orbitbits.gpg \
-            public/rpm/tildr-rpm-pub.gpg \
-            public/rpm/tildr.repo
-          rm -rf public/rpm/fedora
+        run: ruby tools/rb/prepare_public_tree.rb public gh-pages-current
 
       - name: Install dependencies
         run: |
@@ -203,7 +178,7 @@ jobs:
 
       - name: Import DEB artifacts
         if: steps.package.outputs.package_type == 'deb'
-        run: bash scripts/import-debs.sh public tmp-debs
+        run: ruby tools/rb/import_debs.rb public tmp-debs
 
       - name: Download RPM artifacts
         if: steps.package.outputs.package_type == 'rpm' && steps.package.outputs.run_id == ''
@@ -222,7 +197,7 @@ jobs:
 
       - name: Import RPM artifacts
         if: steps.package.outputs.package_type == 'rpm'
-        run: bash scripts/import-rpms.sh public tmp-rpms
+        run: ruby tools/rb/import_rpms.rb public tmp-rpms
 
       - name: Build repositories
         env:
@@ -232,7 +207,7 @@ jobs:
         run: |
           echo "${{ secrets.GPG_PASSPHRASE }}" > /tmp/.gpg-passphrase
           export GPG_PASSPHRASE_FILE=/tmp/.gpg-passphrase
-          bash scripts/build-all.sh public
+          ruby tools/rb/build_all.rb public
           rm -f /tmp/.gpg-passphrase
 
       - name: Export public keys
@@ -250,7 +225,7 @@ jobs:
         run: bundle exec jekyll build
 
       - name: Regenerate directory indexes
-        run: bash scripts/generate-index.sh public
+        run: ruby tools/rb/generate_indexes.rb public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

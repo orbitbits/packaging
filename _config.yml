@@ -17,7 +17,6 @@ exclude:
   - docs/
   - gh-pages-current/
   - public/
-  - scripts/
   - tools/
   - tmp/
   - tmp-artifacts/
