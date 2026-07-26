@@ -40,6 +40,11 @@ socials:
     url: "https://www.linkedin.com/company/orbitbits/"
 
 nav:
+  - label: "Home"
+    href: "/"
+    aria_label: "Packages home"
+    title: "Packages home"
+    icon: "bi bi-house-fill"
   - label: "DEB"
     href: "/deb/"
     aria_label: "APT repository"
@@ -49,7 +54,7 @@ nav:
     href: "/rpm/"
     aria_label: "RPM repository"
     title: "RPM repository"
-    icon: "bi bi-box-seam-fill"
+    icon: "bi bi-box"
   - label: "GPG Key"
     href: "/keys/orbitbits.gpg"
     aria_label: "OrbitBits GPG key"
