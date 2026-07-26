@@ -1,24 +1,24 @@
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Sun, 26 Jul 2026 00:21:05 +0000
+Date: Sun, 26 Jul 2026 00:40:41 +0000
 Description: APT repository for OrbitBits packages
 Label: OrbitBits Package Repository
 Origin: OrbitBits
 Suite: stable
 MD5Sum:
- 859becf044262d3b3e30177561c395d3              212 Release
- 78aa8d6b628ee6895e7860caf3dc3697              865 main/binary-amd64/Packages
- 24c305685ca10196389cd26201b958a7              582 main/binary-amd64/Packages.gz
+ 204826533fad91b9958523b75d780668              212 Release
+ 112da61bd48e642b62a8ea4e6689ca04             5170 main/binary-amd64/Packages
+ 5298880e9958a4e845e3f214391c598c             1165 main/binary-amd64/Packages.gz
 SHA1:
- 3caf864100452b36014126de9a49da2ac6d9d3f8              212 Release
- 64dc81aebf65a7eea3263e6e847cee6fbd300a47              865 main/binary-amd64/Packages
- 377b70f6fd7998ce861249644fcdbf3b2d7b6189              582 main/binary-amd64/Packages.gz
+ 031f0892b7b91f5c207deb1414629c07881250e6              212 Release
+ f75b5be77a83077bf0f6c60f36cb74556ac2cb59             5170 main/binary-amd64/Packages
+ 068beb30dc3fb4eebc4be1958db7453d1453a875             1165 main/binary-amd64/Packages.gz
 SHA256:
- 36471dcf4ee9c2bd042f0736eebef71f5b759c52854e43c55ce2ef0f6973b995              212 Release
- 7953d785d9e4aa7b59cb07bd9c24e355f03b3dedb55780b560f3a8c2d957bd60              865 main/binary-amd64/Packages
- 97b43d037c2d0422fdbae8162d51baaf99b426127ba7b9c62c6aaed511a67efe              582 main/binary-amd64/Packages.gz
+ c1569c795b37085a171219aacf25b94c3ff08a62767a410b4e404feb4b3dc7f1              212 Release
+ b5225d8b6a53fc6b634fdea8b5215ad3c52ceae9f4d21870e961f476a4546033             5170 main/binary-amd64/Packages
+ e56a66d468061579eeb5f2fcf27ad370e689d8ae97c6c359dbaaf2bbcab096dd             1165 main/binary-amd64/Packages.gz
 SHA512:
- c54d56ddefdb422078d86089c61fa430c9d28a8aceff4052bbd2a28fbde1a77324079bc57341f0d21f29c4e3eb60bbc7ffc11c07fff95d720482ed9db9676088              212 Release
- 9db085d2038b8da718e2ba1a09bcdd463c793efc851f84a3b5093ea0f7bb708991d2d3e8fc558bd6fdb0568145e5ce14feffc18030b980cec326b85124e0fa6c              865 main/binary-amd64/Packages
- d48ec40d8327b32f5090efc08f26d482641420093a81e8b2955b546939627ed7e804f6e552ea1a6ad88277d989d9f8be7931eff0c5050d86a5ae435190391b40              582 main/binary-amd64/Packages.gz
+ 114241206ec7e999f93f2f3a062393fd164e1b8ae74fe75cfa9666e623ba72c312c02f2f7f2deeae6dc5da24bb12c056b3181898b21e313bf41a537442633bd1              212 Release
+ d01965e105ef1f0e66ccc18af244c0aef7ccc58999597d12f0ea9076e1ceb444d0589f8dca629caba8f9eacb22803b14709501831fffa4dcfa159f6cd225de8c             5170 main/binary-amd64/Packages
+ 10a9015c74b36ef5e09b10b0ffcc93a097c32f603db892e43755d8979f4af8c98c3969719ca40712584990ebb3a08b45c0f3f6a9e374455123d4ac7f8675cb7d             1165 main/binary-amd64/Packages.gz
