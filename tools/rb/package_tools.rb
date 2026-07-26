@@ -33,11 +33,15 @@ module PackageTools
 
   def run!(*args, chdir: nil)
     info args.shelljoin
-    system(*args, chdir: chdir, exception: true)
+    options = { exception: true }
+    options[:chdir] = chdir if chdir
+    system(*args, **options)
   end
 
   def capture!(*args, chdir: nil)
-    stdout, stderr, status = Open3.capture3(*args, chdir: chdir)
+    options = {}
+    options[:chdir] = chdir if chdir
+    stdout, stderr, status = Open3.capture3(*args, **options)
     return stdout if status.success?
 
     abort_with "#{args.shelljoin} failed\n#{stderr}"
