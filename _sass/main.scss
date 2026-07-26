@@ -3,10 +3,9 @@ $surface: #ffffff;
 $border: #d7dde5;
 $text: #172033;
 $muted: #5c667a;
-$accent: #0f766e;
+$accent: #177782;
 $accent-bright: #26c7d9;
 $code: #edf2f7;
-$nav-bg: rgba(10, 15, 20, .82);
 $footer-bg: #04080d;
 $font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 $font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -26,10 +25,11 @@ body {
 a {
   color: $accent;
   text-decoration: none;
+  transition: color .5s ease;
 }
 
 a:hover {
-  color: color-mix(in srgb, $accent, #000 20%);
+  color: #000000;
   text-decoration: underline;
 }
 
@@ -40,9 +40,13 @@ a:hover {
 .navbar-default {
   min-height: 60px;
   z-index: 2050 !important;
-  border-bottom: 1px solid color-mix(in srgb, $accent-bright, transparent 85%);
-  background: color-mix(in srgb, $nav-bg, transparent 10%) !important;
-  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(186, 186, 186, .15) !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(236, 236, 236, .95),
+    rgba(246, 246, 246, .72)
+  ) !important;
+  backdrop-filter: blur(8px) !important;
 
   a {
     text-decoration: none !important;
@@ -68,7 +72,7 @@ a:hover {
   }
 
   &__brand-text-link {
-    color: #f7f7f7 !important;
+    color: #1d1d1f !important;
   }
 
   &__nav-right {
@@ -82,11 +86,25 @@ a:hover {
       position: relative;
       margin: 0 10px;
       padding-bottom: 3px;
-      color: #f7f7f7 !important;
+      color: #252525 !important;
       transition: color .25s ease;
 
       &:hover {
-        color: $accent-bright !important;
+        color: #000000 !important;
+      }
+
+      &::after {
+        display: block;
+        width: 0;
+        height: 2px;
+        margin-top: 3px;
+        background-color: #000000 !important;
+        content: "";
+        transition: width .25s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
       }
     }
   }
@@ -97,9 +115,18 @@ a:hover {
     font-size: 22px;
 
     i {
-      color: #f7f7f7;
+      color: #1d1d1f;
     }
   }
+}
+
+.brand__text,
+.brand__text__bits {
+  transition: color .3s ease;
+}
+
+.brand__text:hover .brand__text__bits {
+  color: $accent-bright !important;
 }
 
 .menu-mobile {
@@ -173,6 +200,47 @@ code {
   padding: .12rem .3rem;
   border-radius: 4px;
   background: $code;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 700;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    color .25s ease,
+    transform .15s ease;
+}
+
+.btn-primary {
+  --bs-btn-color: #00110e;
+  --bs-btn-bg: #26c7d9;
+  --bs-btn-border-color: #26c7d9;
+  --bs-btn-hover-color: #00110e;
+  --bs-btn-hover-bg: #5fe4d3;
+  --bs-btn-hover-border-color: #26c7d9;
+  --bs-btn-active-color: #00110e;
+  --bs-btn-active-bg: #5fe4d3;
+  --bs-btn-active-border-color: #26c7d9;
+  background: linear-gradient(135deg, #26c7d9, #5fe4d3);
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(38, 199, 217, .28);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #177782;
+  --bs-btn-border-color: #26c7d9;
+  --bs-btn-hover-color: #00110e;
+  --bs-btn-hover-bg: #26c7d9;
+  --bs-btn-hover-border-color: #26c7d9;
+  --bs-btn-active-color: #00110e;
+  --bs-btn-active-bg: #26c7d9;
+  --bs-btn-active-border-color: #26c7d9;
 }
 
 .repository-panel {
@@ -284,7 +352,11 @@ code {
 
 @media (max-width: 991.98px) {
   .navbar-default {
-    background: rgba(10, 15, 20, .92) !important;
-    backdrop-filter: none !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(236, 236, 236, .95),
+      rgba(246, 246, 246, .82)
+    ) !important;
+    backdrop-filter: none;
   }
 }
