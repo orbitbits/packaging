@@ -52,7 +52,7 @@ This repository publishes one static GitHub Pages tree at
 
 - `https://packages.orbitbits.com/deb/` contains `dists/` and `pool/` for APT
 - `https://packages.orbitbits.com/rpm/` contains aggregate RPM metadata in
-  `repodata/` plus Fedora-specific repositories under `fedora/`
+  `repodata/` plus architecture-specific repositories such as `x86_64/`
 - `https://packages.orbitbits.com/keys/` contains the single OrbitBits package
   signing public key
 - `orbitbits.list` and `orbitbits.repo` client configuration files

@@ -16,15 +16,9 @@ fi
 
 while IFS= read -r -d '' rpm_file; do
   filename="$(basename "$rpm_file")"
-  fedora="$(printf '%s' "$filename" | sed -nE 's/.*\.fc([0-9]+)\..*/\1/p')"
   arch="$(rpm -qp --queryformat '%{ARCH}' "$rpm_file")"
 
-  if [ -z "$fedora" ]; then
-    error "Could not infer Fedora version from $filename"
-    exit 1
-  fi
-
-  target_dir="$PUBLIC_DIR/rpm/fedora/$fedora/$arch"
+  target_dir="$PUBLIC_DIR/rpm/$arch"
   mkdir -p "$target_dir"
   info "Importing $filename into $target_dir"
   cp "$rpm_file" "$target_dir/"

@@ -15,7 +15,7 @@ EOF
 cat > "$OUTPUT_DIR/rpm/orbitbits.repo" <<EOF
 [orbitbits]
 name=OrbitBits Package Repository
-baseurl=$RPM_URL/fedora/\$releasever/\$basearch
+baseurl=$RPM_URL/\$basearch
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1

@@ -26,7 +26,7 @@ gh-pages
   rpm/
     index.html
     repodata/
-    fedora/
+    x86_64/
 ```
 
 The generated repository is assembled in `public/` during CI and deployed to
@@ -41,7 +41,8 @@ public/
     pool/
   rpm/
     index.html
-    fedora/
+    repodata/
+    x86_64/
 ```
 
 Do not edit `public/` by hand.
@@ -101,7 +102,7 @@ Package-specific repositories should not deploy package indexes themselves.
 They should build package artifacts and trigger this repository to import them:
 
 - DEB artifacts are imported into `gh-pages` under `deb/pool/main/...`.
-- RPM artifacts are imported into `gh-pages` under `rpm/fedora/...`.
+- RPM artifacts are imported into `gh-pages` under `rpm/<arch>/...`.
 
 When this repository receives a dispatch or manual publish request, GitHub
 Actions checks out the current `gh-pages`, imports the new package files,

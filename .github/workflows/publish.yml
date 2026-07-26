@@ -63,6 +63,7 @@ jobs:
             public/deb/orbitbits.gpg \
             public/deb/tildr-deb-pub.gpg \
             public/deb/tildr.list \
+            public/rpm/fedora \
             public/rpm/orbitbits-packaging-pub.gpg \
             public/rpm/orbitbits.gpg \
             public/rpm/tildr-rpm-pub.gpg \
