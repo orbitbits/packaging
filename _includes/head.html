@@ -1,0 +1,18 @@
+{% assign site_title = site.title | default: site.data.generic.packages.title %}
+{% assign page_title = page.title | default: site_title %}
+{% assign description = page.description | default: site.data.generic.packages.description %}
+{% assign canonical_url = page.url | absolute_url %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>{% if page_title == site_title %}{{ site_title }}{% else %}{{ page_title }} - {{ site_title }}{% endif %}</title>
+<meta name="description" content="{{ description | strip_html | normalize_whitespace | escape }}">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ site_title | escape }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ description | strip_html | normalize_whitespace | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ description | strip_html | normalize_whitespace | escape }}">
+<link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">

@@ -56,6 +56,15 @@ nav {
   margin: 3rem auto;
 }
 
+.site-footer {
+  width: min(920px, calc(100% - 2rem));
+  margin: 3rem auto 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border;
+  color: $muted;
+  font-size: .9rem;
+}
+
 h1 {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -107,4 +116,27 @@ td {
 th {
   color: $muted;
   font-weight: 600;
+}
+
+th button {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+th button:hover {
+  color: $text;
+  text-decoration: underline;
+}
+
+th button[aria-sort="ascending"]::after {
+  content: " up";
+}
+
+th button[aria-sort="descending"]::after {
+  content: " down";
 }

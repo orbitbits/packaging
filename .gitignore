@@ -3,6 +3,7 @@ tmp/
 .bundle/
 .jekyll-cache/
 _site/
+_pages/
 public/
 gh-pages-current/
 tmp-debs/

@@ -19,8 +19,8 @@ help:
 
 build:
 	@ruby tools/rb/build_all.rb
+	@ruby tools/rb/generate_directory_pages.rb public _pages
 	@bundle exec jekyll build
-	@ruby tools/rb/generate_indexes.rb public
 
 apt:
 	@ruby tools/rb/build_apt_repo.rb
@@ -29,7 +29,8 @@ rpm:
 	@ruby tools/rb/build_rpm_repo.rb
 
 index:
-	@ruby tools/rb/generate_indexes.rb public
+	@ruby tools/rb/generate_directory_pages.rb public _pages
+	@bundle exec jekyll build
 
 serve:
 	@cd public && python3 -m http.server 8080

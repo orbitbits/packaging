@@ -7,6 +7,7 @@ on:
       - 'tools/rb/**'
       - '_config.yml'
       - '_data/**'
+      - '_includes/**'
       - '_layouts/**'
       - '_sass/**'
       - 'assets/**'
@@ -221,11 +222,11 @@ jobs:
         run: |
           cp CNAME public/CNAME
 
+      - name: Generate directory pages
+        run: ruby tools/rb/generate_directory_pages.rb public _pages
+
       - name: Build Jekyll site
         run: bundle exec jekyll build
-
-      - name: Regenerate directory indexes
-        run: ruby tools/rb/generate_indexes.rb public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

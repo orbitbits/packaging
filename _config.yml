@@ -1,8 +1,11 @@
+title: "OrbitBits Packages"
 url: "https://packages.orbitbits.com"
 baseurl: ""
-title: "OrbitBits Packages"
 lang: "en-US"
 destination: public
+
+include:
+  - _pages
 
 keep_files:
   - deb
