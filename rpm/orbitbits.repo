@@ -1,6 +1,6 @@
 [orbitbits]
 name=OrbitBits Package Repository
-baseurl=https://packages.orbitbits.com/rpm/fedora/$releasever/$basearch
+baseurl=https://packages.orbitbits.com/rpm/$basearch
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
