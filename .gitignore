@@ -1,6 +1,14 @@
+tmp/
+.bundle-cache/
+.bundle/
+.jekyll-cache/
+_site/
 public/
 gh-pages-current/
 tmp-debs/
 tmp-rpms/
+tmp-artifacts/
+vendor/bundle/
 *.tmp
 .DS_Store
+*~

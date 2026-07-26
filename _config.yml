@@ -1,0 +1,30 @@
+url: "https://packages.orbitbits.com"
+baseurl: ""
+title: "OrbitBits Packages"
+lang: "en-US"
+destination: public
+
+keep_files:
+  - deb
+  - rpm
+  - keys
+  - CNAME
+
+exclude:
+  - .bundle/
+  - .github/
+  - .jekyll-cache/
+  - docs/
+  - gh-pages-current/
+  - public/
+  - scripts/
+  - tools/
+  - tmp/
+  - tmp-artifacts/
+  - tmp-debs/
+  - tmp-rpms/
+  - vendor/
+  - README.md
+  - Makefile
+  - Gemfile
+  - Gemfile.lock

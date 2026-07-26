@@ -5,6 +5,15 @@ on:
     branches: [main]
     paths:
       - 'scripts/**'
+      - 'tools/rb/**'
+      - '_config.yml'
+      - '_data/**'
+      - '_layouts/**'
+      - '_sass/**'
+      - 'assets/**'
+      - 'index.md'
+      - 'Gemfile'
+      - 'Gemfile.lock'
       - '.github/workflows/publish.yml'
       - 'CNAME'
   workflow_dispatch:
@@ -40,6 +49,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Checkout current GitHub Pages
         uses: actions/checkout@v4
@@ -231,6 +245,9 @@ jobs:
       - name: Keep configured custom domain
         run: |
           cp CNAME public/CNAME
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
 
       - name: Regenerate directory indexes
         run: bash scripts/generate-index.sh public

@@ -1,0 +1,21 @@
+brand:
+  name: "OrbitBits"
+  url: "https://orbitbits.com"
+
+packages:
+  title: "OrbitBits Packages"
+  description: "Central APT and RPM repositories for OrbitBits Linux packages."
+  base_url: "https://packages.orbitbits.com"
+  key_url: "https://packages.orbitbits.com/keys/orbitbits.gpg"
+  repositories:
+    - name: "APT"
+      path: "/deb/"
+      metadata:
+        - "/deb/dists/stable/main/binary-amd64/Packages.gz"
+        - "/deb/dists/stable/Release"
+      config: "/deb/orbitbits.list"
+    - name: "RPM"
+      path: "/rpm/"
+      metadata:
+        - "/rpm/repodata/repomd.xml"
+      config: "/rpm/orbitbits.repo"

@@ -1,0 +1,110 @@
+$background: #f8fafc;
+$surface: #ffffff;
+$border: #d7dde5;
+$text: #172033;
+$muted: #5c667a;
+$accent: #0f766e;
+$code: #edf2f7;
+$font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+$font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $background;
+  color: $text;
+  font-family: $font-body;
+  line-height: 1.55;
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid $border;
+  background: $surface;
+}
+
+.brand {
+  color: $text;
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  font-size: .95rem;
+}
+
+.page {
+  width: min(920px, calc(100% - 2rem));
+  margin: 3rem auto;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+h2 {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid $border;
+  font-size: 1.2rem;
+}
+
+p {
+  color: $muted;
+  max-width: 64ch;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+code,
+pre,
+table {
+  font-family: $font-mono;
+}
+
+code {
+  padding: .12rem .3rem;
+  border-radius: 4px;
+  background: $code;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-wrap: anywhere;
+  font-size: .92rem;
+}
+
+th,
+td {
+  padding: .55rem .75rem;
+  border-bottom: 1px solid $border;
+  text-align: left;
+}
+
+th {
+  color: $muted;
+  font-weight: 600;
+}

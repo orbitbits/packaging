@@ -7,7 +7,7 @@ REMOTES := $(shell git remote 2>/dev/null || echo "")
 help:
 	@echo "Options:"
 	@echo
-	@echo "  make build      -> Build APT and RPM repositories into public/"
+	@echo "  make build      -> Build package repositories and Jekyll site into public/"
 	@echo "  make apt        -> Build only the APT repository"
 	@echo "  make rpm        -> Build only the RPM repository"
 	@echo "  make index      -> Generate directory index.html files"
@@ -19,6 +19,8 @@ help:
 
 build:
 	@bash scripts/build-all.sh
+	@bundle exec jekyll build
+	@bash scripts/generate-index.sh public
 
 apt:
 	@bash scripts/build-apt-repo.sh
