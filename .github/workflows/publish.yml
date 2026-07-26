@@ -18,6 +18,12 @@ on:
       tag:
         description: 'Release tag to download, e.g. v0.3.3'
         required: false
+      run_id:
+        description: 'Workflow run id to download Actions artifacts from'
+        required: false
+      artifact_pattern:
+        description: 'Actions artifact name pattern, e.g. tildr-deb-*'
+        required: false
   repository_dispatch:
     types: [publish-package]
 
@@ -72,7 +78,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev apt-utils createrepo-c rpm gnupg
+          sudo apt-get install -y dpkg-dev apt-utils createrepo-c rpm gnupg unzip
 
       - name: Import GPG key
         id: gpg
@@ -91,13 +97,83 @@ jobs:
           package_type="${{ github.event.client_payload.package_type || inputs.package_type }}"
           source_repository="${{ github.event.client_payload.source_repository || inputs.source_repository }}"
           tag="${{ github.event.client_payload.tag || inputs.tag }}"
+          run_id="${{ github.event.client_payload.run_id || inputs.run_id }}"
+          artifact_pattern="${{ github.event.client_payload.artifact_pattern || inputs.artifact_pattern }}"
 
           echo "package_type=${package_type}" >> "$GITHUB_OUTPUT"
           echo "source_repository=${source_repository}" >> "$GITHUB_OUTPUT"
           echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "run_id=${run_id}" >> "$GITHUB_OUTPUT"
+          echo "artifact_pattern=${artifact_pattern}" >> "$GITHUB_OUTPUT"
+
+      - name: Download package artifacts from workflow run
+        if: steps.package.outputs.run_id != ''
+        env:
+          ORBITBITS_PACKAGING_TOKEN: ${{ secrets.ORBITBITS_PACKAGING_TOKEN }}
+          FALLBACK_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          package_type="${{ steps.package.outputs.package_type }}"
+          source_repository="${{ steps.package.outputs.source_repository }}"
+          run_id="${{ steps.package.outputs.run_id }}"
+          artifact_pattern="${{ steps.package.outputs.artifact_pattern }}"
+
+          test -n "$package_type"
+          test -n "$source_repository"
+          test -n "$run_id"
+
+          case "$package_type" in
+            deb)
+              target_dir="tmp-debs"
+              extension="deb"
+              ;;
+            rpm)
+              target_dir="tmp-rpms"
+              extension="rpm"
+              ;;
+            *)
+              echo "::error::Unsupported package_type: ${package_type}"
+              exit 1
+              ;;
+          esac
+
+          if [ -z "$artifact_pattern" ]; then
+            artifact_pattern="*"
+          fi
+
+          export GH_TOKEN="$(printf '%s' "${ORBITBITS_PACKAGING_TOKEN:-$FALLBACK_GITHUB_TOKEN}" | tr -d '\r\n')"
+          mkdir -p tmp-artifacts "$target_dir"
+
+          gh api --paginate "repos/${source_repository}/actions/runs/${run_id}/artifacts" \
+            --jq '.artifacts[] | select(.expired == false) | [.id, .name] | @tsv' \
+            > tmp-artifacts/artifacts.tsv
+
+          matched=0
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            if [[ "$artifact_name" == $artifact_pattern ]]; then
+              matched=$((matched + 1))
+              gh api "repos/${source_repository}/actions/artifacts/${artifact_id}/zip" \
+                > "tmp-artifacts/${artifact_name}.zip"
+            fi
+          done < tmp-artifacts/artifacts.tsv
+
+          if [ "$matched" -eq 0 ]; then
+            echo "::error::No Actions artifact matched '${artifact_pattern}' in ${source_repository} run ${run_id}"
+            exit 1
+          fi
+
+          for zip_file in tmp-artifacts/*.zip; do
+            unzip -o "$zip_file" -d "$target_dir"
+          done
+
+          if ! find "$target_dir" -name "*.${extension}" -type f | grep -q .; then
+            echo "::error::No .${extension} files found in downloaded Actions artifacts"
+            exit 1
+          fi
+
+          find "$target_dir" -name "*.${extension}" -type f -exec ls -lh {} \;
 
       - name: Download DEB artifacts
-        if: steps.package.outputs.package_type == 'deb'
+        if: steps.package.outputs.package_type == 'deb' && steps.package.outputs.run_id == ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -116,7 +192,7 @@ jobs:
         run: bash scripts/import-debs.sh public tmp-debs
 
       - name: Download RPM artifacts
-        if: steps.package.outputs.package_type == 'rpm'
+        if: steps.package.outputs.package_type == 'rpm' && steps.package.outputs.run_id == ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
